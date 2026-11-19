@@ -9,35 +9,66 @@
 
 
 def two_sum(nums, target):
-    # Outline (write your plan here first):
-    #   ...
-    # TODO: return the indices [i, j] (i < j) of the two numbers in `nums` that add up
-    #   to `target`. Assume there is exactly one answer.
-    pass
-
+    # Outline (write your plan here first):firt i try every pair where i is less then j then if num[i] +num[j] = target then it will return i and j
+    #  
+   for i in range(len(nums)):
+        for j in range(i + 1, len(nums)):
+            if nums[i] + nums[j] == target:
+                return [i, j]
+    
 
 def max_profit(prices):
-    # Outline:
-    #   ...
-    # TODO: `prices[i]` is a stock price on day i. Return the most profit obtainable by
-    #   buying on one day and selling on a LATER day. If no profit is possible, return 0.
-    pass
+    # Outline: we look throug prices to find the lowest price then we find the profit then find out if it is the biggest prifit 
+    if not prices:
+        return 0
+
+    lowest = prices[0]
+    best = 0
+
+    for price in prices:
+        if price < lowest:
+            lowest = price
+
+        profit = price - lowest
+        if profit > best:
+            best = profit
+
+    return best
 
 
 def max_subarray(nums):
-    # Outline:
-    #   ...
-    # TODO: return the largest sum of any contiguous (in-a-row) block of numbers in
-    #   `nums`. The list has at least one number.
-    pass
+    # Outline: Keep a running sum of the current block of numbers then If the running sum goes below 0, drop it and start a new block then return best 
+    current = 0
+    best = nums[0]
 
+    for num in nums:
+        current = current + num
+
+        if current > best:
+            best = current
+
+        if current < 0:
+            current = 0
+
+    return best
 
 def is_balanced(s):   # Part 4 - stretch (optional)
     # Outline:
     #   ...
-    # TODO: return True if every bracket in `s` is closed correctly and in the right
-    #   order. The brackets are ( ) [ ] { }. (Hint: a list used as a stack works well.)
-    pass
+    stack = []
+    pairs = {")": "(", "]": "[", "}": "{"}
+
+    for ch in s:
+        if ch in "([{":
+            stack.append(ch)
+        elif ch in ")]}":
+            if len(stack) == 0:
+                return False
+            last = stack.pop()
+            if last != pairs[ch]:
+                return False
+
+    return len(stack) == 0
 
 
 def main():
