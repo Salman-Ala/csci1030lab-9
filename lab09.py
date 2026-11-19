@@ -37,8 +37,7 @@ def max_profit(prices):
 
 
 def max_subarray(nums):
-    # Outline: Keep a running sum of the current block of numbers then If the running sum goes below 0, drop it and start a new block then return best 
-    current = 0
+# Outline: Keep a running sum of the current block of numbers then if the running sum goes below 0 drop it and start a new block and at the end return the best sum    current = 0
     best = nums[0]
 
     for num in nums:
